@@ -149,7 +149,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="icon" type="image/png" href="" />
 
-  <title>Learning Value Functions From Undirected State-Only Experience</title>
+  <title>Predicting Motion Plans for Articulating Everyday Objects</title>
   <meta name="HandheldFriendly" content="True" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="./website_files/iframe_api" type="text/javascript">
@@ -161,7 +161,7 @@
 
 
   <center>
-    <span style="font-size:44px;font-weight:bold;">Learning Value Functions From <br/>Undirected State-Only Experience</span>
+    <span style="font-size:44px;font-weight:bold;">Predicting Motion Plans for <br/>Articulating Everyday Objects</span>
   </center>
   <br />
 
@@ -171,13 +171,13 @@
       <tr>
         <td align="center" width="230px">
           <center>
-            <span style="font-size:22px">Matthew Chang</span>
+            <span style="font-size:22px">Arjun Gupta</span>
           </center>
         </td>
 
         <td align="center" width="230px">
           <center>
-            <span style="font-size:22px">Arjun Gupta</span>
+            <span style="font-size:22px">Max E. Shepherd</span>
           </center>
         </td>
 
@@ -214,7 +214,7 @@
       <tr>
         <td align="center" width="230px">
           <center>
-            <span style="font-size:25px; font-weight: 800;">ICLR 2022</span>
+            <span style="font-size:25px; font-weight: 800;">In Submission.</span>
           </center>
         </td>
       </tr>
@@ -245,131 +245,13 @@
 
 
   <div style="width:800px; margin:0 auto; text-align:justify">
-     This paper tackles the problem of learning value functions from undirected state-only experience (state transitions without action labels i.e. (s,s',r) tuples). We first theoretically characterize the applicability of Q-learning in this setting. We show that tabular Q-learning in discrete Markov decision processes (MDPs) learns the same value function under any arbitrary refinement of the action space. This theoretical result motivates the design of Latent Action Q-learning or LAQ, an offline RL method that can learn effective value functions from state-only experience. Latent Action Q-learning (LAQ) learns value functions using Q-learning on discrete latent actions obtained through a latent-variable future prediction model. We show that LAQ can recover value functions that have high correlation with value functions learned using ground truth actions. Value functions learned using LAQ lead to sample efficient acquisition of goal-directed behavior, can be used with domain-specific low-level controllers, and facilitate transfer across embodiments. Our experiments in 5 environments ranging from 2D grid world to 3D visual navigation in realistic environments demonstrate the benefits of LAQ over simpler alternatives, imitation learning oracles, and competing methods.
+     Mobile manipulation tasks such as opening a door, pulling open a drawer, or lifting a toilet seat require constrained motion of the end-effector under environmental and task constraints. This, coupled with partial information in novel environments, makes it challenging to employ classical motion planning approaches at test time. Our key insight is to cast it as a learning problem to leverage past experience of solving similar planning problems to directly predict motion plans for mobile manipulation tasks in novel situations at test time. To enable this, we develop a simulator, ArtObjSim, that simulates articulated objects placed in real scenes. We then introduce IIK+θ0, a fast and flexible representation for motion plans. Finally, we learn models that use IIK+θ0 to quickly predict motion plans for articulating novel objects at test time. Experimental evaluation shows improved speed and accuracy at generating motion plans than pure search-based methods.
 
   </div>
   <br />
 
   <hr />
 
-
-  <center>
-    <h1>Latent Action Q-Learning</h1>
-  </center>
-
-
-  <div style="width:800px; margin:0 auto; text-align:justify">
-    Our proposed approach decouples learning into three steps: mining latent actions
-from state-only trajectories, using these latent actions for Q-learning to obtain value functions, and
-learning a policy to act according to the learned value function. As per our analysis, if learned latent
-actions are a state-conditioned refinement of the original actions, Q-learning will result in good value
-functions, that will lead to good behaviors.
-  </div>
-  <br />
-
-
-  <p style="margin-top:4px;">
-  </p>
-
-
-  <table align="center" width="1000px">
-    <tbody>
-      <tr>
-        <td width="1200px">
-          <center>
-            <a href="./website_files/laq.png"><img src="./website_files/laq.png" width="600px" /></a><br />
-          </center>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <br />
-
-  <hr />
-  <center>
-    <h1>Behaviors from Value Functions</h1>
-  <div style="width:800px; margin:0 auto; text-align:justify">
-    We show that there are settings in which Q-learning can recover the optimal value function even in the absence of the knowledge of underlying actions. Concretely, we prove that if we are able to obtain an action space which is a strict refinement of the original action
-space, then Q-learning in this refined action space recovers the optimal value function.
-</div>
-    <br/>
-    <a href="./website_files/res.png"><img src="./website_files/res.png" width="800px" /></a><br /><br/>
-
-  <div style="width:800px; margin:0 auto; text-align:justify">
-    We evaluate our method in five environments which test our approach on factors that make
-policy learning hard: continuous control, high-dimensional observations and control, complex real
-world appearance, 3D geometric reasoning, and learning across embodiments.  LAQ learned value functions speed up learning in the different settings over learning simply with sparse
-rewards. In almost all settings, our method not only learns more
-quickly than sparse reward, but converges to a higher mean performance.
-  </div><br/>
-  <a href="./website_files/plots.png"><img src="./website_files/plots.png" width="800px" /></a><br /><br/>
-  <div style="width:800px; margin:0 auto; text-align:justify">Decoupling
-the learning of value function and the policy has the advantage that learned value functions can be
-used to improve learning across embodiment. LAQ-densified rewards functions, speed-up learning
-and consistently guide to higher reward solutions than sparse task rewards, or D3G.</div><br/>
-            <a href="./website_files/plots2.png"><img src="./website_files/plots2.png" width="550px" /></a><br />
-  </center>
-  
-  <hr />
-
-  <center>
-    <h1>Paper</h1>
-  </center>
-
-
-  <table align="center" width="auto">
-    <tbody>
-      <tr>
-        <td width="200px" align="left">
-          <a href="https://openreview.net/pdf?id=6Pe99Juo9gd"><img style="width:200px;border-style: solid; border-color: black; border-width: thin" src="./website_files/thumbnail.png"/></a>
-          <center>
-          </center>
-        </td>
-        <td width="50px" align="center">
-        </td>
-
-        <td width="580px" align="left">
-          <span style="font-size:6px;">
-            &nbsp;
-          <br />
-        </span>
-        <span style="font-size:15pt">
-          Matthew Chang*, Arjun Gupta*, Saurabh Gupta.
-        <br/>
-        Learning Value Functions from Undirected State-only Experience. <br/>
-        International Conference on Learning Representations, 2022<br/>
-        Deep Reinforcement Learning Workshop at NeurIPS, 2021<br/>
-        Offline Reinforcement Learning Workshop at NeurIPS, 2021</span><br/>
-        <span style="font-size:8pt">* indicates equal contribution</span>
-      </p>
-          <div class="paper" id="assemblies19_bib">
-            <pre xml:space="preserve" style="display: block; font-size: 12px">
-@inproceedings{chang2022learning,
-author = "Chang, Matthew and Gupta, Arjun and Gupta, Saurabh",
-title = "Learning Value Functions from Undirected State-only Experience",
-booktitle = "International Conference on Learning Representations",
-year = "2022"
-}
-</pre>
-          </div>
-        </td>
-      </tr>
-
-
-    </tbody>
-  </table>
-  <br />
-
-  <hr/>
-<table align="center" width="800px">
-      <tbody><tr><td width="800px"><left>
-      <center><h1>Acknowledgements</h1></center>
-This material is based upon work supported by NSF under Grant No. IIS-2007035. Any opinions, findings, and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation.
-          Website template from <a href="https://richzhang.github.io/colorization">here</a>, <a href="https://pathak22.github.io/modular-assemblies/">here</a>, and <a href="http://www.cs.cmu.edu/~dchaplot/projects/neural-topological-slam.html">here</a>. <br>
-      </left></td></tr>
-    </tbody></table>
-
-  <br />
   <script xml:space="preserve" language="JavaScript" type="text/javascript">
   <!--hideallbibs();-->
   </script>
